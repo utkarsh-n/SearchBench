@@ -1,0 +1,62 @@
+name: SearchBench
+options:
+  bundleIdPrefix: com.utkarsh
+  deploymentTarget:
+    iOS: '26.0'
+  createIntermediateGroups: true
+packages:
+  LocalSearchKit:
+    path: ../LocalSearchKit
+settings:
+  base:
+    SWIFT_VERSION: '6.0'
+    MARKETING_VERSION: '0.1.0'
+    CURRENT_PROJECT_VERSION: '4'
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_STRICT_CONCURRENCY: complete
+targets:
+  SearchBench:
+    type: application
+    platform: iOS
+    sources:
+      - path: SearchBench
+        excludes:
+          - Resources
+          - Info.plist
+      - path: SearchBench/Resources/Models
+        type: folder
+        buildPhase: resources
+      - path: SearchBench/Resources/Assets.xcassets
+        buildPhase: resources
+    dependencies:
+      - package: LocalSearchKit
+        product: LocalSearchKit
+    info:
+      path: SearchBench/Info.plist
+      properties:
+        CFBundleDisplayName: Search Bench
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.utkarsh.searchbench
+        TARGETED_DEVICE_FAMILY: '1'
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+schemes:
+  SearchBench:
+    build:
+      targets:
+        SearchBench: all
+    run:
+      config: Release
